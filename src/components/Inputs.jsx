@@ -28,9 +28,7 @@ function Inputs({setQuery, units, setUnits}) {
 
   const handleLocationClick = () => {
     if (navigator.geolocation) {
-      toast.info("Fetching user's location.");
       navigator.geolocation.getCurrentPosition((position) => {
-        toast.success('Successfully fetched weather for your current location!');
         let lat = position.coords.latitude;
         let lon = position.coords.longitude;
 

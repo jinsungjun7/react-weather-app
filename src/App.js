@@ -14,57 +14,62 @@ function App() {
   const [query, setQuery] = useState({q: "London"});
   const [units, setUnits] = useState('metric');
   const [weather, setWeather] = useState(null);
+  const [backgroundColor, setBackgroundColor] = useState('from-gray-700 to-white-700');
 
   function askLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => { 
-        let lat = position.coords.latitude;
-        let lon = position.coords.longitude;
-        
-        setQuery({lat, lon});
+          let lat = position.coords.latitude;
+          let lon = position.coords.longitude;
+          setQuery({lat, lon});
       })    
-      
     }
-    console.log('test');  
   };
   
   useEffect(() => {askLocation()}, []);
 
   useEffect(() => {
     const fetchWeather = async () => {
-      const message = query.q ? query.q : 'current location.';
-
+      let message = "";
+      if (query.q) {
+        message = query.q.charAt(0).toUpperCase() + query.q.slice(1);
+      } else {
+        message = 'current location.';
+      }
       toast.info('Fetching weather for ' + message);
       await getFormattedWeatherData({...query, units}).then(data => {
-        toast.success(`Successfully fetched weather for ${data.name}, ${data.country}`);
-        
+        let locationName = data.name.charAt(0).toUpperCase() + data.name.slice(1);
+        toast.success(`Successfully fetched weather for ${locationName}, ${data.country}`);
         setWeather(data);
-        toast.error(`Unsuccessful`);
-      });
+      });     
     };    
-    fetchWeather();
+    fetchWeather();    
   }, [query, units]); // everytime you change the location/query or units, you fetch new data
 
-  const formatBackgroundMetric = () => {
+
+  useEffect(() => {
+    setBackgroundColor(formatBackground);
+  }, [weather]);
+
+  const formatBackground = () => {
     if (!weather) return 'from-gray-700 to-white-700';
-    const thresholdMetric = 20;
+    const threshold = units === "metric" ? 20 : 60;
     
-    if (weather.temp <= thresholdMetric) return 'from-cyan-700 to-blue-700';
+    if (weather.temp <= threshold) return 'from-cyan-700 to-blue-700';
 
     return 'from-yellow-700 to-orange-700';
   }
 
-  const formatBackgroundImperial = () => {
-    if (!weather) return 'from-gray-700 to-white-700';
-    const thresholdImperial = 60;
-    if (weather.temp <= thresholdImperial) return 'from-cyan-700 to-blue-700';
-
-    return 'from-yellow-700 to-orange-700';
+  function getBackgroundColor() {
+    return backgroundColor;
   }
 
 
   return (
-    <div className={`mx-auto max-w-screen-md mt-4 py-5 px-32 bg-gradient-to-br h-fit shadow-xl shadow-gray-400 ${units === "metric" ? formatBackgroundMetric() : formatBackgroundImperial()}`}>
+    // <div className={`mx-auto max-w-screen-md mt-4 py-5 px-32 bg-gradient-to-br h-fit shadow-xl shadow-gray-400 ${units === "metric" ? formatBackgroundMetric() : formatBackgroundImperial()}`}>
+    // <div className={`mx-auto max-w-screen-md mt-4 py-5 px-32 bg-gradient-to-br h-fit shadow-xl shadow-gray-400 from-gray-700 to-white-700 ${((getUnits() === "metric" && getWeather() >= 20) || (getUnits() === "imperial" && getWeather() >= 60)) ? 'from-yellow-700 to-orange-700' : 'from-cyan-700 to-blue-700'}`}>
+    <div className={`mx-auto max-w-screen-md mt-4 py-5 px-32 bg-gradient-to-br h-fit shadow-xl shadow-gray-400 ${getBackgroundColor()}`}>
+
       <TopButtons setQuery={setQuery} />
       <Inputs setQuery={setQuery} units={units} setUnits={setUnits} />
 
@@ -78,7 +83,7 @@ function App() {
         </div>
       )}
 
-    <ToastContainer autoClose={5000} theme='colored' newestOnTop={true} /> 
+    <ToastContainer autoClose={1000} theme='colored' newestOnTop={true} /> 
 
     </div>
 
