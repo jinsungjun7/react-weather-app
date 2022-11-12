@@ -17,12 +17,12 @@ function TopButtons({setQuery}) {
         },
         {
             id:4,
-            title: 'Chicago'
+            title: 'Cairo'
         },
         {
             id:5,
             title: 'Paris'
-        }
+        },
     ]
   return <div className="flex items-center justify-around my-6">
     {cities.map((city) => (

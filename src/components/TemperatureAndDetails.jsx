@@ -21,8 +21,8 @@ function TemperatureAndDetails({weather: {
     }
   return (
     <div>
-        <div className="flex items-center justify-center py-6 text-xl text-cyan-300">
-            <p className='capitalize'>
+        <div className="flex items-center justify-center py-6 text-xl text-white">
+            <p className='capitalize text-2xl'>
                 {description}
             </p>
         </div>
@@ -32,7 +32,7 @@ function TemperatureAndDetails({weather: {
             <img src={iconUrlFromCode(icon)} alt="" className="w-20"/>
 
             {/* toFixed allows you to round */}
-            <p className="flex flex-col space-y-2 text-5xl">{`${temp.toFixed()}`}&#176;</p>
+            <p className="flex flex-col space-y-2 text-6xl">{`${temp.toFixed()}`}&#176;</p>
 
             <div className="flex flex-col space-y-2">
                 <div className='flex font-light text-sm items-center justify-start'>
