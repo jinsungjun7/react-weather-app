@@ -7,9 +7,12 @@ function TimeAndLocation({weather: {dt, timezone, name, country}}) {
     const getCurrentTime = () => {
         return new Date();
     }
+
+    // keeps track of current Time as a hook so we can use it to update the time string
     const [currentTime, setCurrentTime] = useState({q: new Date()});
     const [timeAndLocationString, setTimeAndLocation] = useState("");
 
+    // updates the currentTime every second
     setInterval( () => {
         let newDate = new Date();
         setCurrentTime({q: newDate})

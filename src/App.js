@@ -11,7 +11,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
-  const [query, setQuery] = useState({q: "London"});
+  const [query, setQuery] = useState({q: "London"});  
   const [units, setUnits] = useState('metric');
   const [weather, setWeather] = useState(null);
   const [backgroundColor, setBackgroundColor] = useState('from-gray-700 to-white-700');
@@ -25,7 +25,7 @@ function App() {
       })    
     }
   };
-  
+
   useEffect(() => {askLocation()}, []);
 
   useEffect(() => {
