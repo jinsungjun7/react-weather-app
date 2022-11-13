@@ -48,6 +48,7 @@ function App() {
         });     
     };    
     fetchWeather();    
+    
   }, [query, units]); // everytime you change the location/query or units, you fetch new data
 
 

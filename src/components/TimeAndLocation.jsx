@@ -1,12 +1,30 @@
 import React from 'react'
-import { formatToLocalTime } from '../services/weatherService'
+import { formatToLocalTime } from '../services/weatherService';
+import { useEffect, useState } from 'react';
 
-function TimeAndLocation({weather: {dt, timezone, name, country}}) {
+function TimeAndLocation({weather: {dt, timezone, name, country}}) { 
+
+    const getCurrentTime = () => {
+        return new Date();
+    }
+    const [currentTime, setCurrentTime] = useState({q: new Date()});
+    const [timeAndLocationString, setTimeAndLocation] = useState("");
+
+    setInterval( () => {
+        let newDate = new Date();
+        setCurrentTime({q: newDate})
+    }, 1000);
+
+    useEffect(() => {
+            setTimeAndLocation(`${formatToLocalTime(currentTime.q.getTime()/1000, timezone, "ccc, dd LLL yyyy' | Local time: 'hh:mm:ss a")}`
+            );
+        
+    }, [currentTime]);
+
   return <div>
-        <div className="flex items-center justify-center my-6">
-            <p className="text-white text-xl font-extralight">
-                {formatToLocalTime(dt, timezone)}
-                {/* time will not be correct due to OpenWeather API data not being completely accurate */}
+        <div className="flex items-center justify-center my-6"  id="timeAndDateContainer">
+            <p className="text-white text-xl font-extralight" id="timeAndDate">
+                {timeAndLocationString}
             </p>
         </div>
 
