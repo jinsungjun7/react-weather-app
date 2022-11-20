@@ -75,7 +75,7 @@ function App() {
   return (
     // <div className={`mx-auto max-w-screen-md mt-4 py-5 px-32 bg-gradient-to-br h-fit shadow-xl shadow-gray-400 ${units === "metric" ? formatBackgroundMetric() : formatBackgroundImperial()}`}>
     // <div className={`mx-auto max-w-screen-md mt-4 py-5 px-32 bg-gradient-to-br h-fit shadow-xl shadow-gray-400 from-gray-700 to-white-700 ${((getUnits() === "metric" && getWeather() >= 20) || (getUnits() === "imperial" && getWeather() >= 60)) ? 'from-yellow-700 to-orange-700' : 'from-cyan-700 to-blue-700'}`}>
-    <div className={`mx-auto max-w-screen-md mt-0 mb-4 md:mt-4 py-5 px-4 md:px-32 h-fit shadow-xl shadow-gray-400  ${getBackgroundColor()}`} style={{paddingBottom: '2rem'}}>
+    <div className={`mx-auto max-w-screen-md mt-0 mb-0 md:mb-4 md:mt-4 py-5 px-4 md:px-32 h-fit shadow-xl shadow-gray-400  ${getBackgroundColor()}`} style={{paddingBottom: '2rem'}}>
 
       <TopButtons setQuery={setQuery} />
       <Inputs setQuery={setQuery} units={units} setUnits={setUnits} />
