@@ -19,14 +19,14 @@ function TimeAndLocation({weather: {dt, timezone, name, country}}) {
     }, 1000);
 
     useEffect(() => {
-            setTimeAndLocation(`${formatToLocalTime(currentTime.q.getTime()/1000, timezone, "ccc, dd LLL yyyy' | Local time: 'hh:mm:ss a")}`
+            setTimeAndLocation(`${formatToLocalTime(currentTime.q.getTime()/1000, timezone, "ccc, dd LLL yyyy' | 'hh:mm:ss a")}`
             );
         
     }, [currentTime]);
 
   return <div>
         <div className="flex items-center justify-center my-6"  id="timeAndDateContainer">
-            <p className="text-white text-xl font-extralight" id="timeAndDate">
+            <p className="text-white text-lg sm:text-xl font-extralight" id="timeAndDate">
                 {timeAndLocationString}
             </p>
         </div>
