@@ -48,18 +48,18 @@ function Inputs({setQuery, units, setUnits}) {
   return (
     <div className="flex flex-row justify-center my-6">
         
-        <div className="flex flex-row w-3-4 items-center justify-center space-x-4">
+        <div className="flex flex-row w-3-4 items-center justify-center space-x-4 mr-3 md:mr-0">
             <form onSubmit={(e) => handleSubmit(e)}>
               <input 
               id='locationSearch'
               // value={city}
               onChange={(e) => setCity(e.currentTarget.value)}
               type="text" 
-              className="text-xl font-light p-2 w-full shadow-xl  focus:outline-none capitalize placeholder:normal-case"
+              className="text-lg md:text-xl font-light p-1 md:p-2 w-full shadow-xl  focus:outline-none capitalize placeholder:normal-case"
               placeholder="Search for city" 
               />
             </form>
-            <UilSearch size={25} className="text-white cursor-pointer   transition ease-out hover:scale-125" onClick={handleSearchClick} />
+            <UilSearch size={25} className="text-white cursor-pointer transition ease-out hover:scale-125" onClick={handleSearchClick} />
 
             <UilLocationPoint size={25} className="text-white cursor-pointer transition ease-out hover:scale-125" onClick={handleLocationClick} />
         </div>
